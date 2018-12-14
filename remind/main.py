@@ -21,21 +21,29 @@ class weixin_remind():
     def login_url(self):
         login_url = 'https://shimo.im/login'
         self.browser.get(login_url)
-        id_input = self.wait.until(EC.presence_of_elements_located((
-            By.XPATH, "//*/input@[name='mobileOrEmail']")))
-        pwd_input = self.wait.until(EC.presence_of_elements_located((
-            By.XPATH, "//*/input@[name=password]")))
-        submit = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//*/button")))
+        id_input = self.wait.until(EC.presence_of_element_located((
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[1]/div/div/\
+            div[2]/div[1]/div[1]/div/input")))
+        pwd_input = self.wait.until(EC.presence_of_element_located((
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[1]/div/div/\
+            div[2]/div[1]/div[2]/div/input")))
+        submit = self.wait.until(EC.element_to_be_clickable((
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[1]/div/div/\
+            div[2]/div[1]/button")))
         id_input.clear()
         id_input.send_keys(self.id)
         pwd_input.clear()
         pwd_input.send_keys(self.pwd)
-        self.wait.until(EC.text_to_be_present_in_element_value((By.XPATH, "//*/input@[name='mobileOrEmail']")))
-        self.wait.until(EC.text_to_be_present_in_element_value((By.XPATH, "//*/button")))
+        self.wait.until(EC.text_to_be_present_in_element_value((
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[1]/div/div/\
+            div[2]/div[1]/div[1]/div/input"), self.id))
+        self.wait.until(EC.text_to_be_present_in_element_value((
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[1]/div/div/\
+            div[2]/div[1]/div[2]/div/input"), self.pwd))
         submit.click()
 
 
 if __name__ == '__main__':
     m = weixin_remind()
-
+    m.login_url()
 
