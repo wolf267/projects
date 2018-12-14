@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import settings
 import logging
+from lxml import etree
 
 
 class weixin_remind():
@@ -42,8 +43,13 @@ class weixin_remind():
             div[2]/div[1]/div[2]/div/input"), self.pwd))
         submit.click()
 
+    def get_text(self):
+        html = self.browser.page_source
+        print(html)
 
 if __name__ == '__main__':
     m = weixin_remind()
     m.login_url()
+    m.get_text()
+    # m.quit_browser()
 
